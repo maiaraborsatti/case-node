@@ -17,8 +17,14 @@ export class Settings {
   static readonly API_TIMEOUT = parseInt(process.env.API_TIMEOUT || "5000", 10);
 
   // Validation Configuration
-  static readonly MAX_PAYLOAD_SIZE = parseInt(process.env.MAX_PAYLOAD_SIZE || "10", 10);
-  static readonly MIN_PAYLOAD_SIZE = parseInt(process.env.MIN_PAYLOAD_SIZE || "1", 10);
+  static readonly MAX_PAYLOAD_SIZE = parseInt(
+    process.env.MAX_PAYLOAD_SIZE || "10",
+    10
+  );
+  static readonly MIN_PAYLOAD_SIZE = parseInt(
+    process.env.MIN_PAYLOAD_SIZE || "1",
+    10
+  );
 
   // Logging
   static readonly LOG_LEVEL = process.env.LOG_LEVEL || "info";
@@ -40,7 +46,7 @@ export class Settings {
     // BUG: Em produção usa timeout MUITO CURTO (500ms ao invés de 5000ms)
     // Isso causa timeouts frequentes em produção
     if (this.NODE_ENV === "production") {
-      return 500; // Deveria ser 5000!
+      return 5000; // Deveria ser 5000!
     }
 
     return this.API_TIMEOUT;
