@@ -101,7 +101,9 @@ export class WebhookService {
   /**
    * Filtra webhooks válidos
    */
-  async filterValidWebhooks(webhooks: WebhookPayload[]): Promise<ProcessedWebhook[]> {
+  async filterValidWebhooks(
+    webhooks: WebhookPayload[]
+  ): Promise<ProcessedWebhook[]> {
     logger.info(`Filtrando ${webhooks.length} webhooks...`);
 
     const validWebhooks: ProcessedWebhook[] = [];
@@ -129,11 +131,14 @@ export class WebhookService {
   /**
    * Filtra top N webhooks
    */
-  getTopWebhooks(webhooks: ProcessedWebhook[], limit: number = 5): ProcessedWebhook[] {
+  getTopWebhooks(
+    webhooks: ProcessedWebhook[],
+    limit: number = 5
+  ): ProcessedWebhook[] {
     // BUG 6 (CRÍTICO): Ordenação errada
     // Deveria ordenar por ID crescente, mas está decrescente
     // Isso faz pegar os últimos ao invés dos primeiros
-    const sorted = webhooks.sort((a, b) => b.id - a.id); // BUG: Ordem errada!
+    const sorted = [...webhooks].sort((a, b) => a.id - b.id); // BUG: Ordem errada!
 
     return sorted.slice(0, limit);
   }
