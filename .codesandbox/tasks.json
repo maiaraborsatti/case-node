@@ -1,0 +1,35 @@
+{
+  "$schema": "https://codesandbox.io/schemas/tasks.json",
+  "setupTasks": [
+    {
+      "name": "Instalar Dependências",
+      "command": "npm install"
+    },
+    {
+      "name": "Configurar .env",
+      "command": "cp ENV_FILE.txt .env"
+    }
+  ],
+  "tasks": {
+    "dev": {
+      "name": "Executar em Desenvolvimento",
+      "command": "npm run dev",
+      "runAtStart": false
+    },
+    "build": {
+      "name": "Build TypeScript",
+      "command": "npm run build",
+      "runAtStart": false
+    },
+    "start-prod": {
+      "name": "Executar em Produção",
+      "command": "npm run start:prod",
+      "runAtStart": false
+    },
+    "validar": {
+      "name": "Validar Saída",
+      "command": "cat output/webhooks_processados.json && echo '\\n---\\nValidação:' && node -e \"const data = require('./output/webhooks_processados.json'); console.log('Total:', data.length); console.log('IDs:', data.map(w => w.id))\"",
+      "runAtStart": false
+    }
+  }
+}

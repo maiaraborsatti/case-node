@@ -1,0 +1,15 @@
+# Configurações da Aplicação
+NODE_ENV=production
+PORT=3000
+
+# API Externa  
+WEBHOOK_API_URL=https://jsonplaceholder.typicode.com/posts
+API_TIMEOUT=5000
+
+# Logging
+LOG_LEVEL=info
+
+# Validação
+MAX_PAYLOAD_SIZE=10
+MIN_PAYLOAD_SIZE=1
+
