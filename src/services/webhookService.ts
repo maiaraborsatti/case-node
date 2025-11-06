@@ -80,18 +80,27 @@ export class WebhookService {
    * Valida payload do webhook
    */
   validatePayload(webhook: any): boolean {
-    // BUG 5: Validação de title que falha em casos específicos
-    if (webhook.title) {
-      // BUG: Se title tiver exatamente 50 caracteres, causa erro
-      if (webhook.title.length === 50) {
-        // Tenta acessar índice inexistente
-        const invalid = webhook.title[200]; // Vai dar undefined ou erro
-      }
+    // Sugestão de validação de estrutura e tipo
+    if (!webhook || typeof webhook !== "object") {
+      logger.warn("Payload inválido ou indefinido");
+      return false;
     }
 
     // Validação básica
     if (!webhook.id || !webhook.userId) {
       logger.warn("Webhook sem ID ou userId");
+      return false;
+    }
+
+    // Sugestão de validação se há título
+    if (!webhook.title) {
+      logger.warn("Webhook sem título");
+      return false;
+    }
+
+    // Correção e sugestão de validação de tamanho do título
+    if (webhook.title.length > 200) {
+      logger.warn(`Título muito longo para o webhook ${webhook.id}`);
       return false;
     }
 
