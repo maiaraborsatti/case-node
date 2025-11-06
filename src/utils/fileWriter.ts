@@ -43,7 +43,7 @@ export class FileWriter {
       // Tenta usar método que não existe no fs/promises
       // fs.promises.writeFile é correto, mas está usando writeFileSync
       // que não retorna Promise
-      await fs.writeFileSync(filepath, JSON.stringify(webhooks, null, 2));
+      await fs.writeFile(filepath, JSON.stringify(webhooks, null, 2));
 
       logger.info("✓ Arquivo salvo com sucesso!");
       return true;
